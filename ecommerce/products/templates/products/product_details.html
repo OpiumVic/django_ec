@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ product.name }} — Details</title>
+  <style>
+    .product-wrap { max-width:900px; margin:24px auto; display:flex; gap:24px; align-items:flex-start; }
+    .product-image { flex:0 0 480px; }
+    .product-image img { width:100%; height:auto; display:block; border:1px solid #ddd; padding:8px; background:#fff; }
+    .product-info { flex:1; }
+    .price { font-size:1.4rem; color:#111; margin:8px 0; }
+    .meta { color:#666; margin-bottom:12px; }
+  </style>
+</head>
+<body>
+  <a href="{% url 'products:product_loop' %}">← Back to products</a>
+  <div class="product-wrap">
+    <div class="product-image">
+      {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+      {% else %}
+        <img src="{% url 'products/no-image.png' %}" alt="No image available">
+      {% endif %}
+    </div>
+
+    <div class="product-info">
+      <h1>{{ product.name }}</h1>
+      <div class="meta">
+        Category: {{ product.category }}<br>
+        SKU: {{ product.pk }} 
+      </div>
+
+      <div class="price">Price: ${{ product.price }}</div>
+
+      <h3>Description</h3>
+      <div class="description">
+        {{ product.description|linebreaks }}
+      </div>
+
+      <p class="meta">Added: {{ product.created_at|date:"F j, Y, g:i a" }}</p>
+    </div>
+  </div>
+</body>
+</html>
