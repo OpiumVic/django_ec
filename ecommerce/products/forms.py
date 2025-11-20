@@ -1,4 +1,4 @@
-from .models import Category
+from .models import Category, Product
 from django import forms
 
 class CategoryForm(forms.ModelForm):
@@ -6,4 +6,8 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = '__all__'
 
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = '__all__'
 
